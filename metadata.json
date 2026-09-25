@@ -1,0 +1,6 @@
+{
+  "name": "Ludmila Deolinda - Link na Bio",
+  "description": "Cartão de visita digital profissional para a terapeuta Ludmila Deolinda.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -242,7 +242,7 @@ const AdminPage: React.FC = () => {
               <p className="text-sm font-semibold text-slate-400 mb-4 uppercase tracking-wider">Prévia em tempo real</p>
               <div className="w-[320px] h-[640px] bg-white border-[8px] border-slate-900 rounded-[3rem] shadow-2xl overflow-hidden mx-auto relative">
                 <iframe 
-                  src="/link" 
+                  src="/#/link" 
                   className="w-full h-full border-none pointer-events-none"
                   title="Preview"
                 />

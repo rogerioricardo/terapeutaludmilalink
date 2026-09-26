@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { clientConfig } from '../data/config';
 import { ProfileHeader } from '../components/ProfileHeader';
 import { LinkButton } from '../components/LinkButton';
@@ -8,6 +8,30 @@ import { QRCodeSection } from '../components/QRCodeSection';
 import { Footer } from '../components/Footer';
 
 const LinkPage: React.FC = () => {
+  const [links, setLinks] = useState(clientConfig.links);
+
+  useEffect(() => {
+    // Load persisted theme and links
+    const savedTheme = localStorage.getItem('custom_theme_primary');
+    const savedSecondary = localStorage.getItem('custom_theme_secondary');
+    
+    if (savedTheme) {
+      document.documentElement.style.setProperty('--primary-color', savedTheme);
+    }
+    if (savedSecondary) {
+      document.documentElement.style.setProperty('--secondary-color', savedSecondary);
+    }
+
+    const savedLinks = localStorage.getItem('custom_links');
+    if (savedLinks) {
+      try {
+        setLinks(JSON.parse(savedLinks));
+      } catch (e) {
+        console.error("Error loading links", e);
+      }
+    }
+  }, []);
+
   return (
     <div className="relative min-h-screen flex justify-center overflow-x-hidden">
       {/* Background with Texture and Overlay */}
@@ -26,7 +50,7 @@ const LinkPage: React.FC = () => {
           <ProfileHeader />
           
           <div className="px-6 space-y-2 mt-4">
-            {clientConfig.links.map((link) => (
+            {links.map((link) => (
               <LinkButton 
                 key={link.id}
                 title={link.title}

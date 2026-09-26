@@ -9,10 +9,10 @@ export const clientConfig = {
   description: "Acompanhamento terapêutico especializado para equilíbrio emocional, saúde mental e autoconhecimento profundo.",
   // Para hospedar no cPanel:
   // 1. Após o 'build', você terá uma pasta 'dist'.
-  // 2. Suba o conteúdo da 'dist' para a sua public_html.
-  // 3. Coloque a foto 'ludmila.jpeg' diretamente na raiz da public_html.
-  profileImage: "/ludmila.jpeg",
-  backgroundImage: "/ludmila.jpeg",
+  // 2. Suba o conteúdo da 'dist' para a sua pasta (ex: public_html/links).
+  // 3. Coloque a foto 'ludmila.jpeg' diretamente nesta mesma pasta.
+  profileImage: "ludmila.jpeg",
+  backgroundImage: "ludmila.jpeg",
   
   // Primary Action Links
   // Icons can be any name from lucide-react (e.g., MessageCircle, Globe, Instagram, Facebook, MapPin)

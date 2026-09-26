@@ -67,14 +67,19 @@ const AdminPage: React.FC = () => {
 
   const addLink = () => {
     if (newLink.title && newLink.url) {
-      setLinks([...links, { ...newLink, id: Date.now().toString(), icon: 'Link', primary: false }]);
+      const updatedLinks = [...links, { ...newLink, id: Date.now().toString(), icon: 'Link', primary: false }];
+      setLinks(updatedLinks);
+      // Update localStorage immediately so the preview iframe reflects the change
+      localStorage.setItem('custom_links', JSON.stringify(updatedLinks));
       setNewLink({ title: '', url: '', subtitle: '' });
       setShowAddModal(false);
     }
   };
 
   const removeLink = (id: string) => {
-    setLinks(links.filter(l => l.id !== id));
+    const updatedLinks = links.filter(l => l.id !== id);
+    setLinks(updatedLinks);
+    localStorage.setItem('custom_links', JSON.stringify(updatedLinks));
   };
 
   const renderContent = () => {
@@ -296,7 +301,7 @@ const AdminPage: React.FC = () => {
             <div className="w-6 h-6 bg-emerald-500 rounded-full flex items-center justify-center">
               <Save size={14} className="text-white" />
             </div>
-            <p className="text-sm font-medium">Simulação: Alterações processadas!</p>
+            <p className="text-sm font-medium">Configurações aplicadas com sucesso!</p>
           </div>
         )}
 
@@ -312,6 +317,7 @@ const AdminPage: React.FC = () => {
               <p className="text-sm font-semibold text-slate-400 mb-4 uppercase tracking-wider">Prévia em tempo real</p>
               <div className="w-[320px] h-[640px] bg-white border-[8px] border-slate-900 rounded-[3rem] shadow-2xl overflow-hidden mx-auto relative">
                 <iframe 
+                  key={`${JSON.stringify(links)}-${selectedTheme}`}
                   src="/links/" 
                   className="w-full h-full border-none pointer-events-none"
                   title="Preview"
@@ -342,6 +348,16 @@ const AdminPage: React.FC = () => {
                   value={newLink.title}
                   onChange={(e) => setNewLink({ ...newLink, title: e.target.value })}
                   placeholder="Ex: Siga no Instagram"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold text-slate-700 mb-2">Subtítulo (Opcional)</label>
+                <input 
+                  type="text" 
+                  value={newLink.subtitle}
+                  onChange={(e) => setNewLink({ ...newLink, subtitle: e.target.value })}
+                  placeholder="Ex: @terapeutaludmila"
                   className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all"
                 />
               </div>
